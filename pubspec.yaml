@@ -1,4 +1,4 @@
-name: mounts_of_the_world
+name: mtd_app
 description: A new Flutter project.
 
 # The following line prevents the package from being accidentally published to
@@ -73,6 +73,11 @@ flutter:
   # "family" key with the font family name, and a "fonts" key with a
   # list giving the asset and other descriptors for the font. For
   # example:
+
+  fonts:
+    - family:  MyFlutterApp
+      fonts:
+       - asset: fonts/MyFlutterApp.ttf
   # fonts:
   #   - family: Schyler
   #     fonts:

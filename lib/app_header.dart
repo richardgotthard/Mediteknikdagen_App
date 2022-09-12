@@ -13,7 +13,7 @@ class AppHeader extends StatelessWidget {
         children: [
           ClipOval(
             child: Image.network(
-              'https://avatars.githubusercontent.com/u/14922088?v=4',
+              'https://avatars.githubusercontent.com/u/46537243?s=400&u=5fe46ad4550c45a8ff53ff340283e1cf7240738e&v=4',
               width: 50,
               height: 50,
               fit: BoxFit.cover,
@@ -24,7 +24,7 @@ class AppHeader extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: const [
               Text(
-                'Hello, Widy',
+                'Hello, Richard',
                 style:
                     TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
               ),

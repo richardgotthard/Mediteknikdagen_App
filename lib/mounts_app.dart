@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:mounts_of_the_world/colors.dart';
+import 'package:mtd_app/colors.dart';
 
 import 'app_bottom_bar.dart';
 import 'app_category_list.dart';
 import 'app_header.dart';
 import 'app_mount_listview.dart';
 import 'app_search.dart';
+import '../icons/custom_app_icons.dart';
 
 class MountsApp extends StatelessWidget {
   const MountsApp({Key? key}) : super(key: key);
@@ -19,7 +20,7 @@ class MountsApp extends StatelessWidget {
         backgroundColor: Colors.transparent,
         title: const Center(
           child: Icon(
-            Icons.terrain,
+            MyFlutterApp.mtd_svart,
             color: mainColor,
             size: 40,
           ),
@@ -35,7 +36,7 @@ class MountsApp extends StatelessWidget {
           color: mainColor,
           alignment: Alignment.bottomLeft,
           child: const Icon(
-            Icons.terrain,
+            MyFlutterApp.mtd_svart,
             color: Colors.white,
             size: 80,
           ),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mtd_app/icons/custom_app_icons.dart';
 
 import 'colors.dart';
 import 'mounts_app.dart';
@@ -26,7 +27,7 @@ class SplashPage extends StatelessWidget {
           const Align(
             alignment: Alignment.center,
             child: Icon(
-              Icons.terrain,
+              MyFlutterApp.mtd_svart,
               color: Colors.white,
               size: 90,
             ),

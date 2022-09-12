@@ -8,8 +8,8 @@ class CategoryModel {
 }
 
 final List<CategoryModel> categories = [
-  CategoryModel(category: 'Mountain', icon: Icons.terrain),
-  CategoryModel(category: 'Forest', icon: Icons.park),
-  CategoryModel(category: 'Beach', icon: Icons.beach_access),
-  CategoryModel(category: 'Hiking', icon: Icons.directions_walk)
+  CategoryModel(category: 'Jobs', icon: Icons.work),
+  CategoryModel(category: 'Companies', icon: Icons.dashboard),
+  CategoryModel(category: 'Schedule', icon: Icons.calendar_month),
+  CategoryModel(category: 'Map', icon: Icons.map)
 ];

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mounts_of_the_world/models/mount_model.dart';
+import 'package:mtd_app/models/mount_model.dart';
 
 class AppMountListView extends StatelessWidget {
   const AppMountListView({Key? key}) : super(key: key);
