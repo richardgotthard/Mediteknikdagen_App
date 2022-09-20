@@ -1,16 +1,35 @@
 import 'package:flutter/material.dart';
 
-import 'colors.dart';
+import 'style/colors.dart';
+import 'companies.dart';
 import 'models/app_bottom_bar_item.dart';
 
 class AppBottomBar extends StatefulWidget {
   const AppBottomBar({Key? key}) : super(key: key);
+
+  Widget build(BuildContext context) {
+    final PageController controller = PageController();
+    return PageView(
+      controller: controller,
+    );
+  }
 
   @override
   _AppBottomBarState createState() => _AppBottomBarState();
 }
 
 class _AppBottomBarState extends State<AppBottomBar> {
+  int currentIndex = 0;
+  final PageController _pageController = PageController(
+    initialPage: 0,
+    keepPage: true,
+  );
+
+  void changePage(int index) {
+    setState(() {
+      currentIndex = index;
+    });
+  }
   List<AppBottomBarItem> barItems = [
     AppBottomBarItem(icon: Icons.home, isSelected: true),
     AppBottomBarItem(icon: Icons.explore, isSelected: false),
@@ -20,6 +39,13 @@ class _AppBottomBarState extends State<AppBottomBar> {
 
   @override
   Widget build(BuildContext context) {
+    PageView(
+      controller: _pageController,
+      onPageChanged: (index) => (changePage(index)),
+      children: <Widget>[
+        CompaniesScreen(),
+      ],
+    );
     return Container(
       margin: const EdgeInsets.only(top: 20),
       padding: const EdgeInsets.all(8),
@@ -65,6 +91,7 @@ class _AppBottomBarState extends State<AppBottomBar> {
                 color: Colors.grey,
               ),
               onPressed: () {
+                (index) => (_pageController.jumpToPage(index));
                 setState(() {
                   for (var item in barItems) {
                     item.isSelected = item == currentBarItem;

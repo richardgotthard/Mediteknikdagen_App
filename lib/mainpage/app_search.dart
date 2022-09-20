@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'colors.dart';
+import '../style/colors.dart';
 
 class AppSearch extends StatelessWidget {
   const AppSearch({Key? key}) : super(key: key);

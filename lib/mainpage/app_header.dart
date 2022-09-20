@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'colors.dart';
+import '../style/colors.dart';
 
 class AppHeader extends StatelessWidget {
   const AppHeader({Key? key}) : super(key: key);

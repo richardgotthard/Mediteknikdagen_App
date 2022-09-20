@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mtd_app/colors.dart';
+import 'package:mtd_app/style/colors.dart';
 import 'package:mtd_app/models/category_model.dart';
 
 class AppCategoryList extends StatelessWidget {

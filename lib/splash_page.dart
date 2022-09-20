@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mtd_app/icons/custom_app_icons.dart';
 
-import 'colors.dart';
+import 'style/colors.dart';
 import 'mounts_app.dart';
 
 class SplashPage extends StatelessWidget {
@@ -15,7 +15,7 @@ class SplashPage extends StatelessWidget {
         Navigator.pushReplacement(
             context,
             MaterialPageRoute(
-              builder: (context) => const MountsApp(),
+              builder: (context) => const MyStatefulWidget(),
             ));
       },
     );
