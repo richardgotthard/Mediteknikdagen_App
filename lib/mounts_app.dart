@@ -7,6 +7,7 @@ import 'mainpage/app_header.dart';
 import 'mainpage/app_mount_listview.dart';
 import 'mainpage/app_search.dart';
 import '../icons/custom_app_icons.dart';
+import 'mainpage/gridcompanies.dart';
 
 class MyStatefulWidget extends StatefulWidget {
   const MyStatefulWidget({Key? key});
@@ -29,28 +30,20 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
           child: AppMountListView(),
         ),
         AppCategoryList(),
-        //AppBottomBar(),
+        AppBottomBar(),
       ],
     ),
-    Column(  
-      children: const [
-        AppHeader(),
-      ]
-    ),
-  
+    Column(children: const [
+      AppSearch(),
+      GridViewer(),
+    ]),
     const Text(
-
       'Index 1: Business',
       style: optionStyle,
     ),
-    const Text(
-      'Index 2: School',
-      style: optionStyle,
-    ),
-    const Text(
-      'Index 3: Settings',
-      style: optionStyle,
-    ),
+    Column(children: const [
+      AppHeader(),
+    ]),
   ];
 
   void _onItemTapped(int index) {
@@ -93,34 +86,44 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
         child: _widgetOptions.elementAt(_selectedIndex),
       ),
       bottomNavigationBar: BottomNavigationBar(
-        
+        type: BottomNavigationBarType.fixed,
+        elevation: 0,
+        backgroundColor: mainColor,
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'Home',
-            backgroundColor: Colors.red,
+            icon: Icon(
+              Icons.home,
+              color: Colors.white,
+            ),
+            label: '',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.business),
-            label: 'Business',
-            backgroundColor: Colors.green,
+            icon: Icon(
+              Icons.business,
+              color: Colors.white,
+            ),
+            label: '',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.school),
-            label: 'School',
-            backgroundColor: Colors.purple,
+            icon: Icon(
+              Icons.school,
+              color: Colors.white,
+            ),
+            label: '',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.settings),
-            label: 'Settings',
-            backgroundColor: Colors.pink,
+            icon: Icon(
+              Icons.settings,
+              color: Colors.white,
+            ),
+            label: '',
           ),
         ],
         currentIndex: _selectedIndex,
         selectedItemColor: Colors.amber[800],
         onTap: _onItemTapped,
-          margin: const EdgeInsets.only(top: 20),
-      padding: const EdgeInsets.all(8),
+        // margin: const EdgeInsets.only(top: 20),
+        //padding: const EdgeInsets.all(8),
       ),
     );
   }

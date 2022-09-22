@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "173318853383",
+    "firebase_url": "https://mtd-app-2022-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "mtd-app-2022",
+    "storage_bucket": "mtd-app-2022.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:173318853383:android:a648c4bb2a721ef7c02ba2",
+        "android_client_info": {
+          "package_name": "dev.widdyjp.mounts_of_the_world"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "173318853383-pet29h1hi1p70mv563cgnu6bbjjqupcn.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD3k-wKS8HWjFMu92KeXtdYMZrb3NZhh2c"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "173318853383-pet29h1hi1p70mv563cgnu6bbjjqupcn.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "173318853383-parr5mcfgsapn2e0bu9tua40agm4vd8c.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "dev.widdyjp.mountsOfTheWorld"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

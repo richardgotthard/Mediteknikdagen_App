@@ -1,19 +1,18 @@
 {
-    "sv": {
       "companies" :[
-          {
+        {
               "company": "RecordedFuture",
               "partner": "gold",
               "information": ["Our aim is ambitious: to organize and analyze threat data in an entirely new and different way for better, faster security. Our team includes software engineers, data scientists, designers, linguists, and technical business people with deep expertise in information security, intelligence, analysis, and visualization who has a passion for working with IT security.","We're hiring, why not join us?"],
               "logo": "recordedfuture.svg"
-          },
-          {
+        },
+        {
               "company": "Sectra",
               "partner": "gold",
               "information": ["Our customers operate in some of society's most critical functions. Our job is to help them become more efficient, and to give them the tools to make peoples’ lives healthier, safer and more secure. Contributing to a healthier and safer society is our strongest driving force. Sectra develops and sells advanced solutions for medical imaging and secure communication. We help hospitals around the world increase their efficiency so that they can provide patients with better care. We help critical social functions, government officials and diplomats to use modern technology without risking intrusion in the handling and exchange of sensitive information."],
               "logo": "sectra.svg"
-          },
-          {
+        },
+        {
             "company": "Arriver",
             "partner": "silver",
             "information": ["Arriver is a new software unit and brand, fully focused on developing perception, fusion and drive policy software for the next generation cars. It will deliver an open, scalable and flexible architecture solution running on Qualcomm Snapdragon Ride System on a Chip (SoC) platform. Arriver has 800 people in five countries – China, Germany, Romania, Sweden, USA  – and builds on more than a decade of experience in active safety software development."],
@@ -156,11 +155,4 @@
         }
       ]
 
-     
-    },
-  
-    "en": {
-       
-    }
-  }
-  
+}

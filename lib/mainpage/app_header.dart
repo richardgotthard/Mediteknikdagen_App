@@ -30,6 +30,7 @@ class AppHeader extends StatelessWidget {
               ),
               Text(
                 'Good morning',
+                //'Welcome to the Fair',
                 style: TextStyle(color: mainColor, fontSize: 12),
               ),
             ],
