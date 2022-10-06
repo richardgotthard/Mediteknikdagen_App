@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:mtd_app/style/colors.dart';
 
-import 'app_bottom_bar.dart';
 import 'mainpage/app_category_list.dart';
+import 'mainpage/app_company_search.dart';
 import 'mainpage/app_header.dart';
 import 'mainpage/app_mount_listview.dart';
 import 'mainpage/app_search.dart';
 import '../icons/custom_app_icons.dart';
 import 'mainpage/gridcompanies.dart';
+import 'models/category_model.dart';
 
 class MyStatefulWidget extends StatefulWidget {
   const MyStatefulWidget({Key? key});
@@ -30,11 +31,11 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
           child: AppMountListView(),
         ),
         AppCategoryList(),
-        AppBottomBar(),
+        //AppBottomBar(),
       ],
     ),
     Column(children: const [
-      AppSearch(),
+      Search(),
       GridViewer(),
     ]),
     const Text(
@@ -74,11 +75,47 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
         child: Container(
           padding: const EdgeInsets.all(30),
           color: mainColor,
-          alignment: Alignment.bottomLeft,
-          child: const Icon(
-            MyFlutterApp.mtd_svart,
-            color: Colors.white,
-            size: 80,
+          child: Stack(
+            children: [
+              Container(
+                child: ListView.builder(
+                    itemCount: categories.length + 1,
+                    itemBuilder: (BuildContext context, i) {
+                      if (i == 0) {
+                        // Add an extra item to the start
+                        return const ListTile(
+                            title: Text("Home",
+                                style: TextStyle(
+                                    color:
+                                        Color.fromARGB(255, 255, 255, 255))));
+                      }
+                      i -= 1;
+                      return ListTile(
+                        title: Text(categories[i].category,
+                            style: const TextStyle(
+                                color: Color.fromARGB(255, 255, 255, 255))),
+                      );
+                    }),
+              ),
+              const OverflowBox(
+                alignment: Alignment.bottomLeft,
+                child: Icon(
+                  MyFlutterApp.mtd_svart,
+                  color: Colors.white,
+                  size: 80,
+                ),
+              ),
+              // Container(
+              //   padding: const EdgeInsets.all(30),
+              //   color: mainColor,
+              //   alignment: Alignment.bottomLeft,
+              //   child: const Icon(
+              //     MyFlutterApp.mtd_svart,
+              //     color: Colors.white,
+              //     size: 80,
+              //   ),
+              // ),
+            ],
           ),
         ),
       ),

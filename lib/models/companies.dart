@@ -1,57 +1,67 @@
-// To parse this JSON data, do
-//
-//     final companies = companiesFromJson(jsonString);
+class CompanyModel {
+  String path;
+  String name;
+  String location;
+  String description;
+  bool hasExjobb;
+  bool hasSommarjobb;
+  bool hasJobb;
 
-import 'dart:convert';
-
-Companies companiesFromJson(String str) => Companies.fromJson(json.decode(str));
-
-String companiesToJson(Companies data) => json.encode(data.toJson());
-
-class Companies {
-  Companies({
-    required this.companies,
+  CompanyModel({
+    this.path = '',
+    this.name = '',
+    this.location = '',
+    this.description = '',
+    this.hasExjobb = false,
+    this.hasSommarjobb = false,
+    this.hasJobb = false,
   });
-
-  List<Company> companies;
-
-  factory Companies.fromJson(Map<String, dynamic> json) => Companies(
-        companies: List<Company>.from(
-            json["companies"].map((x) => Company.fromJson(x))),
-      );
-
-  Map<String, dynamic> toJson() => {
-        "companies": List<dynamic>.from(companies.map((x) => x.toJson())),
-      };
 }
 
-class Company {
-  // ignore: prefer_typing_uninitialized_variables
-  var partner;
-
-  Company({
-    required this.company,
-    this.partner,
-    required this.information,
-    required this.logo,
-  });
-
-  String company;
-  //Partner partner;
-  List<String> information;
-  String logo;
-
-  factory Company.fromJson(Map<String, dynamic> json) => Company(
-        company: json["company"],
-        partner: json["partner"],
-        information: List<String>.from(json["information"].map((x) => x)),
-        logo: json["logo"],
-      );
-
-  Map<String, dynamic> toJson() => {
-        "company": company,
-        "partner": partner,
-        "information": List<dynamic>.from(information.map((x) => x)),
-        "logo": logo,
-      };
-}
+final List<CompanyModel> companyItems = [
+  CompanyModel(
+      path: 'https://pbs.twimg.com/media/DCXPb0lW0AA6__s?format=jpg&name=large',
+      name: 'Gaia',
+      description:
+          'Semeru, or Mount Semeru, is an active volcano in East Java, Indonesia. It is located in the subduction zone, where the Indo-Australia plate subducts under the Eurasia plate. It is the highest mountain on the island of Java.',
+      location: 'Register for attendence',
+      hasExjobb: true,
+      hasSommarjobb: true,
+      hasJobb: false),
+  CompanyModel(
+      path: 'https://pbs.twimg.com/media/DCXPb0lW0AA6__s?format=jpg&name=large',
+      name: 'SAAB',
+      description:
+          'Semeru, or Mount Semeru, is an active volcano in East Java, Indonesia. It is located in the subduction zone, where the Indo-Australia plate subducts under the Eurasia plate. It is the highest mountain on the island of Java.',
+      location: 'Register for attendence',
+      hasExjobb: true,
+      hasSommarjobb: true,
+      hasJobb: true),
+  CompanyModel(
+      path: 'https://pbs.twimg.com/media/DCXPb0lW0AA6__s?format=jpg&name=large',
+      name: 'Viaplay',
+      description:
+          'Semeru, or Mount Semeru, is an active volcano in East Java, Indonesia. It is located in the subduction zone, where the Indo-Australia plate subducts under the Eurasia plate. It is the highest mountain on the island of Java.',
+      location: 'Register for attendence',
+      hasExjobb: false,
+      hasSommarjobb: false,
+      hasJobb: true),
+  CompanyModel(
+      path: 'https://pbs.twimg.com/media/DCXPb0lW0AA6__s?format=jpg&name=large',
+      name: 'SVT',
+      description:
+          'Semeru, or Mount Semeru, is an active volcano in East Java, Indonesia. It is located in the subduction zone, where the Indo-Australia plate subducts under the Eurasia plate. It is the highest mountain on the island of Java.',
+      location: 'Register for attendence',
+      hasExjobb: true,
+      hasSommarjobb: false,
+      hasJobb: false),
+  CompanyModel(
+      path: 'https://pbs.twimg.com/media/DCXPb0lW0AA6__s?format=jpg&name=large',
+      name: 'Ericsson',
+      description:
+          'Semeru, or Mount Semeru, is an active volcano in East Java, Indonesia. It is located in the subduction zone, where the Indo-Australia plate subducts under the Eurasia plate. It is the highest mountain on the island of Java.',
+      location: 'Register for attendence',
+      hasExjobb: false,
+      hasSommarjobb: false,
+      hasJobb: false),
+];

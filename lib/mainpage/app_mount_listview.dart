@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:mtd_app/models/mount_model.dart';
 
+import 'notificationscreen.dart';
+
 class AppMountListView extends StatelessWidget {
   const AppMountListView({Key? key}) : super(key: key);
 
@@ -25,22 +27,37 @@ class AppMountListView extends StatelessWidget {
               ),
               borderRadius: BorderRadius.circular(16),
             ),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.end,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  currentMount.name,
-                  style: const TextStyle(
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
+            child: GestureDetector(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => NotificationScreen(
+                      image: mountItems[index].path,
+                      name: mountItems[index].name,
+                      description: mountItems[index].description,
+                      location: mountItems[index].location,
+                    ),
                   ),
-                ),
-                Text(
-                  currentMount.location,
-                  style: const TextStyle(color: Colors.white),
-                ),
-              ],
+                );
+              },
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.end,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    currentMount.name,
+                    style: const TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  Text(
+                    currentMount.location,
+                    style: const TextStyle(color: Colors.white),
+                  ),
+                ],
+              ),
             ),
           );
         },

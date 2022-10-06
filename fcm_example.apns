@@ -1,0 +1,14 @@
+{
+  "Simulator Target Bundle": "<your bundle>",
+  "aps": {
+    "badge": 0,
+    "alert": {
+      "title": "Test Push",
+      "body": "Success! Push notification in simulator! 🎉",
+      "sound": "default"
+    }
+  },
+
+  "gcm.message_id": "123",
+  "example-data-key": "example-data-value"
+}

@@ -2,9 +2,26 @@ import 'package:flutter/material.dart';
 
 import '../style/colors.dart';
 
+import '../models/companies.dart';
 
-class AppSearch extends StatelessWidget {
-  const AppSearch({Key? key}) : super(key: key);
+//final key = GlobalKey<ScaffoldState>();
+//final TextEditingController _searchQuery = TextEditingController();
+//List<CompanyModel> _list;
+//List<CompanyModel> _searchList = List();
+
+//bool _IsSearching;
+//String _searchText = "";
+
+class Search extends StatefulWidget {
+  const Search({Key? key}) : super(key: key);
+
+  @override
+  State<Search> createState() => _SearchState();
+}
+
+class _SearchState extends State<Search> {
+  //final List<String> companies = companyItems.name;
+  String _input = '';
 
   @override
   Widget build(BuildContext context) {
@@ -25,6 +42,10 @@ class AppSearch extends StatelessWidget {
             children: [
               Expanded(
                 child: Container(
+                  // onPressed: () {
+                  //   showSearch(
+                  //   context: context, delegate: PlayerSearch(soccerPlayers.));
+                  // },
                   height: 50,
                   padding: const EdgeInsets.all(10),
                   decoration: BoxDecoration(
