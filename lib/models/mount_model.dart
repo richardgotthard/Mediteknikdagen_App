@@ -29,7 +29,7 @@ final List<MountModel> mountItems = [
   MountModel(
       path:
           'https://res.cloudinary.com/dkkd45ayz/image/upload/f_auto,q_auto,dpr_auto/w_8688,h_4887,c_fill,g_auto/w_2048,h_1152,c_scale/episerver/39b2b64a-7290-4c7b-9029-22048489ea91/20200826-en-3752389-1.jpg',
-      name: 'SAAB: The future of National Defense ',
+      name: 'SAAB ',
       description:
           'Mount Merbabu is a dormant stratovolcano in Central Java province on the Indonesian island of Java. The name Merbabu could be loosely translated as Mountain of Ash from the Javanese combined words; Meru means mountain and awu or abu means ash.',
       location: 'Register for attendence'),

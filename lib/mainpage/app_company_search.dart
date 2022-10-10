@@ -19,9 +19,38 @@ class Search extends StatefulWidget {
   State<Search> createState() => _SearchState();
 }
 
+final TextEditingController _searchQuery = TextEditingController();
+
 class _SearchState extends State<Search> {
-  //final List<String> companies = companyItems.name;
-  String _input = '';
+  List<CompanyModel> found_companies = [];
+  @override
+  initState() {
+    // at the beginning, all users are shown
+    found_companies = companyItems;
+    super.initState();
+  }
+
+  // This function is called whenever the text field changes
+  void _runFilter(String enteredKeyword) {
+    List<CompanyModel> results = [];
+    if (enteredKeyword.isEmpty) {
+      // if the search field is empty or only contains white-space, we'll display all users
+      results = companyItems;
+    } else {
+      // results = companyItems
+      //     .where((user) =>
+      //         user["name"].toLowerCase().contains(enteredKeyword.toLowerCase()))
+      //     .toList();
+
+      //FIX THIS!!!!! https://stackoverflow.com/questions/60245865/the-operator-isnt-defined-for-the-class-object-dart
+      // we use the toLowerCase() method to make it case-insensitive
+    }
+
+    // Refresh the UI
+    setState(() {
+      found_companies = results;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -42,29 +71,19 @@ class _SearchState extends State<Search> {
             children: [
               Expanded(
                 child: Container(
-                  // onPressed: () {
-                  //   showSearch(
-                  //   context: context, delegate: PlayerSearch(soccerPlayers.));
-                  // },
-                  height: 50,
-                  padding: const EdgeInsets.all(10),
+                  padding: const EdgeInsets.all(5),
                   decoration: BoxDecoration(
                     color: Colors.grey[200],
                     borderRadius: BorderRadius.circular(10),
                   ),
-                  child: Row(
-                    children: const [
-                      Icon(
-                        Icons.search,
-                        color: Colors.grey,
+                  child: Column(children: const [
+                    TextField(
+                      decoration: InputDecoration(
+                        border: InputBorder.none,
+                        hintText: 'Search',
                       ),
-                      SizedBox(width: 10),
-                      Text(
-                        'Search',
-                        style: TextStyle(color: Colors.grey),
-                      ),
-                    ],
-                  ),
+                    ),
+                  ]),
                 ),
               ),
               Container(

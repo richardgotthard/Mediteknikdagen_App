@@ -30,18 +30,22 @@ class CompanyScreen extends StatelessWidget {
       required this.hasJobb})
       : super(key: key);
 
-  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
         backgroundColor: mainColor,
-        title: const Center(
-          child: Icon(
-            MyFlutterApp.mtd_svart,
-            color: Colors.white,
-            size: 40,
+        title: Center(
+          child: GestureDetector(
+            onTap: () {
+              Navigator.pop(context);
+            },
+            child: const Icon(
+              MyFlutterApp.mtd_svart,
+              color: Colors.white,
+              size: 40,
+            ),
           ),
         ),
         actions: const [
@@ -109,7 +113,6 @@ class CompanyScreen extends StatelessWidget {
                               style: TextStyle(color: Colors.white)),
                         ),
                       ],
-                       
                     ],
                   ),
                   Row(
@@ -130,7 +133,7 @@ class CompanyScreen extends StatelessWidget {
                   ),
                   Text(
                     description,
-                    style: const TextStyle(fontSize: 20),
+                    style: const TextStyle(fontSize: 15),
                   ),
                 ],
               ),

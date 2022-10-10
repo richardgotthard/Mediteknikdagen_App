@@ -2,7 +2,7 @@
     package="dev.widdyjp.mounts_of_the_world">
    <application
         android:label="mounts_of_the_world"
-        android:icon="@mipmap/launcher_icon">
+        android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTop"

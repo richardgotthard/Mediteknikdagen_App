@@ -30,11 +30,16 @@ class NotificationScreen extends StatelessWidget {
       appBar: AppBar(
         elevation: 0,
         backgroundColor: mainColor,
-        title: const Center(
-          child: Icon(
-            MyFlutterApp.mtd_svart,
-            color: Colors.white,
-            size: 40,
+        title: Center(
+          child: GestureDetector(
+            onTap: () {
+              Navigator.pop(context);
+            },
+            child: const Icon(
+              MyFlutterApp.mtd_svart,
+              color: Colors.white,
+              size: 40,
+            ),
           ),
         ),
         actions: const [
@@ -49,7 +54,6 @@ class NotificationScreen extends StatelessWidget {
           borderRadius: BorderRadius.circular(10),
           color: Colors.grey.withOpacity(0.1),
         ),
-        // height: 600,
         alignment: Alignment.topCenter,
         padding: const EdgeInsets.all(10.0),
         margin: const EdgeInsets.all(20),
@@ -86,13 +90,19 @@ class NotificationScreen extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   Text(
-                    //    textAlign: start,
                     name,
                     style: const TextStyle(fontSize: 40),
                   ),
                   Text(
                     description,
                     style: const TextStyle(fontSize: 10),
+                  ),
+                  Container(
+                    margin: const EdgeInsets.all(10.0),
+                    child: Text(
+                      location,
+                      style: const TextStyle(fontSize: 10, color: Colors.blue),
+                    ),
                   ),
                 ],
               ),

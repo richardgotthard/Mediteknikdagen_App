@@ -31,6 +31,7 @@
 .pub/
 /build/
 
+
 # Web related
 lib/generated_plugin_registrant.dart
 
@@ -50,6 +51,7 @@ app.*.map.json
 .dart_tool/
 .packages
 build/
+.lib/trash/
 # If you're building an application, you may want to check-in your pubspec.lock
 pubspec.lock
 

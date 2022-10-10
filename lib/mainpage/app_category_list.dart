@@ -1,8 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:mtd_app/mainpage/companyscreen.dart';
-import 'package:mtd_app/models/companies.dart';
+import 'package:mtd_app/mainpage/category/companies.dart';
+import 'package:mtd_app/mainpage/category/eventScreen.dart';
+import 'package:mtd_app/mainpage/category/mapmap.dart';
+import 'package:mtd_app/mainpage/category/schedule.dart';
 import 'package:mtd_app/style/colors.dart';
 import 'package:mtd_app/models/category_model.dart';
+
+import 'catogories_list.dart';
+
+List<Route> myRoute = [
+  MaterialPageRoute(builder: (_) => Companies()),
+  MaterialPageRoute(builder: (_) => Schedule()),
+  MaterialPageRoute(builder: (_) => MapMap()),
+  MaterialPageRoute(builder: (_) => EventScreen()),
+];
 
 class AppCategoryList extends StatelessWidget {
   const AppCategoryList({Key? key}) : super(key: key);
@@ -15,20 +26,30 @@ class AppCategoryList extends StatelessWidget {
           padding: const EdgeInsets.all(20),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: const [
-              Text(
+            children: [
+              const Text(
                 'Category',
                 style: TextStyle(
                   color: Colors.black,
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              Text(
-                'See more',
-                style: TextStyle(
-                  color: mainColor,
-                  fontSize: 12,
-                  fontWeight: FontWeight.bold,
+              GestureDetector(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const SeemoreList(),
+                    ),
+                  );
+                },
+                child: const Text(
+                  'See more',
+                  style: TextStyle(
+                    color: mainColor,
+                    fontSize: 12,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
               ),
             ],
@@ -44,19 +65,7 @@ class AppCategoryList extends StatelessWidget {
               final currentCategory = categories[index];
               return GestureDetector(
                 onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => CompanyScreen(
-                          image: companyItems[index].path,
-                          name: companyItems[index].name,
-                          description: companyItems[index].description,
-                          location: companyItems[index].location,
-                          hasExjobb: companyItems[index].hasExjobb,
-                          hasSommarjobb: companyItems[index].hasSommarjobb,
-                          hasJobb: companyItems[index].hasJobb),
-                    ),
-                  );
+                  Navigator.of(context).push((myRoute[index]));
                 },
                 child: Container(
                   width: 100,
