@@ -3,57 +3,145 @@ import 'package:flutter/material.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:mtd_app/mainpage/companyscreen.dart';
 import '../models/companies.dart';
+import 'firebase_options.dart';
 
 //DatabaseReference companyref = FirebaseDatabase.instance.ref('companies');
 
-class GridViewer extends StatelessWidget {
-  GridViewer({Key? key}) : super(key: key);
-  final Stream<QuerySnapshot> companyref =
-      FirebaseFirestore.instance.collection('Companies').snapshots();
+class Company {
+  String id;
+  final String name;
+  final String description;
+  final String location;
+  final bool hasExjobb;
+  final bool hasJobb;
+  final bool hasSommarjobb;
+
+  Company({
+    this.id = '',
+    required this.name,
+    required this.description,
+    required this.location,
+    required this.hasExjobb,
+    required this.hasJobb,
+    required this.hasSommarjobb,
+  });
+
+  Map<String, dynamic> toJson() => {
+        'id': id,
+        'name': name,
+        'description': description,
+        'location': location,
+        'hasExjobb': hasExjobb,
+        'hasJobb': hasJobb,
+        'hasSommarjobb': hasSommarjobb,
+      };
+
+  static Company fromJson(Map<String, dynamic> json) => Company(
+        id: json['id'],
+        name: json['name'],
+        description: json['description'],
+        location: json['location'],
+        hasExjobb: json['hasExjobb'],
+        hasJobb: json['hasJobb'],
+        hasSommarjobb: json['hasSommarjobb'],
+      );
+}
+
+Stream<List<Company>> readCompany() => FirebaseFirestore.instance
+    .collection('companies')
+    .snapshots()
+    .map((snapshot) =>
+        snapshot.docs.map((doc) => Company.fromJson(doc.data())).toList());
+
+Widget buildCompany(Company company) => ListTile(
+      // alignment: Alignment.center,
+      // color: Colors.grey.withOpacity(0.2),
+      // decoration: BoxDecoration(
+      //   image: DecorationImage(
+      //     image: NetworkImage(currentComp.path),
+      //     fit: BoxFit.cover,
+      //   ),
+      // ),
+      title: Text(company.name),
+    );
+
+class GridViewer2 extends StatelessWidget {
+  GridViewer2({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Expanded(
-        child: GridView.builder(
-            padding: const EdgeInsets.all(20.0),
-            itemCount: companyItems.length,
-            gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-                maxCrossAxisExtent: 200,
-                childAspectRatio: 3 / 2,
-                crossAxisSpacing: 20,
-                mainAxisSpacing: 20),
-            itemBuilder: (BuildContext ctx, index) {
-              final currentComp = companyItems[index];
-              return GestureDetector(
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => CompanyScreen(
-                            image: companyItems[index].path,
-                            name: companyItems[index].name,
-                            description: companyItems[index].description,
-                            location: companyItems[index].location,
-                            hasExjobb: companyItems[index].hasExjobb,
-                            hasSommarjobb: companyItems[index].hasSommarjobb,
-                            hasJobb: companyItems[index].hasJobb),
-                      ),
-                    );
-                  },
-                  child: Container(
-                    alignment: Alignment.center,
-                    color: Colors.grey.withOpacity(0.2),
-                    // decoration: BoxDecoration(
-                    //   image: DecorationImage(
-                    //     image: NetworkImage(currentComp.path),
-                    //     fit: BoxFit.cover,
-                    //   ),
-                    // ),
-                    child: Text(companyItems[index].name),
-                  ));
+        child: StreamBuilder<List<Company>>(
+            stream: readCompany(),
+            builder: (context, snapshot) {
+              if (snapshot.hasError) {
+                return Text('Something went wrong! ${snapshot.error} ');
+              } else if (snapshot.hasData) {
+                final companyss = snapshot.data!;
+
+                return ListView(
+                  children: companyss.map(buildCompany).toList(),
+                );
+                // padding: const EdgeInsets.all(20.0),
+                // //itemCount: data.size,
+                // gridDelegate:
+                //     const SliverGridDelegateWithMaxCrossAxisExtent(
+                //         maxCrossAxisExtent: 200,
+                //         childAspectRatio: 3 / 2,
+                //         crossAxisSpacing: 20,
+                //         mainAxisSpacing: 20),
+                // itemBuilder: (context, index) {
+                // return const Text('hej');
+                // print(data.size);
+
+                //final currentComp = data.docs[index];
+                //return GestureDetector(
+                // onTap: () {
+                //   Navigator.push(
+                //     context,
+                //     MaterialPageRoute(
+                //       builder: (context) => CompanyScreen(
+                //          // image: currentComp.path,
+                //           name: currentComp.name,
+                //           description: companyItems[index].description,
+                //           location: companyItems[index].location,
+                //           hasExjobb: companyItems[index].hasExjobb,
+                //           hasSommarjobb: companyItems[index].hasSommarjobb,
+                //           hasJobb: companyItems[index].hasJobb),
+                //     ),
+                //   );
+                // },
+
+                // Container(
+                //   alignment: Alignment.center,
+                //   color: Colors.grey.withOpacity(0.2),
+                //   // decoration: BoxDecoration(
+                //   //   image: DecorationImage(
+                //   //     image: NetworkImage(currentComp.path),
+                //   //     fit: BoxFit.cover,
+                //   //   ),
+                //   // ),
+                //   child: Text(' ${data.docs[index]['name']}'),
+                // );
+                //);
+              } else {
+                return const Text('Loading...');
+              }
             }));
   }
 }
 
+// Future<bool> checkIfDocExists(String docId) async {
+//   try {
+//     // Get reference to Firestore collection
+//     var collectionRef = FirebaseFirestore.instance.collection('companies');
+
+//     var doc = await collectionRef.doc(docId).get();
+//     return doc.exists;
+//   } catch (e) {
+//     throw e;
+//   }
+// }
 
 // class Choice {
 //   const Choice({this.title = '', this.icon = Icons.access_time});
@@ -92,9 +180,7 @@ class GridViewer extends StatelessWidget {
 //               ]),
 //         ));
 //   }
-// }  
-
-
+// }
 
 //   //   return StreamBuilder(
 //   //       stream: FirebaseDatabase.instance
@@ -140,10 +226,6 @@ class GridViewer extends StatelessWidget {
 //   //         }
 //   //       });
 //   // }
-
-
-
-
 
 // //         child: FutureBuilder(
 // //       future: FirebaseDatabase.instance

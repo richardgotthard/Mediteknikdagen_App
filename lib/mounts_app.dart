@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mtd_app/mainpage/category/aboutus.dart';
 import 'package:mtd_app/mainpage/category/schedule.dart';
+import 'package:mtd_app/mainpage/gridviewer2.dart';
 import 'package:mtd_app/style/colors.dart';
 
 import 'mainpage/app_category_list.dart';
@@ -25,6 +26,8 @@ List<Route> myRoute = [
   MaterialPageRoute(builder: (_) => const EventScreen()),
 ];
 
+final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+
 class MyStatefulWidget extends StatefulWidget {
   const MyStatefulWidget({Key? key});
 
@@ -34,8 +37,6 @@ class MyStatefulWidget extends StatefulWidget {
 
 class _MyStatefulWidgetState extends State<MyStatefulWidget> {
   int _selectedIndex = 0;
-  static const TextStyle optionStyle =
-      TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
   final List<Widget> _widgetOptions = <Widget>[
     Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -49,9 +50,9 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
         //AppBottomBar(),
       ],
     ),
-    Column(children: const [
-      Search(),
-      GridViewer(),
+    Column(children:  [
+      const Search(),
+      GridViewer2(),
     ]),
     Column(children: const [
       SavedList(),
@@ -71,19 +72,20 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: _scaffoldKey,
       appBar: AppBar(
         elevation: 0,
         backgroundColor: Colors.transparent,
         title: Center(
           child: GestureDetector(
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => const MyStatefulWidget(),
-                ),
-              );
-            },
+            // onTap: () {
+            //   Navigator.push(
+            //     context,
+            //     MaterialPageRoute(
+            //       builder: (context) => const MyStatefulWidget(),
+            //     ),
+            //   );
+            // },
             child: const Icon(
               MyFlutterApp.mtd_svart,
               color: mainColor,
@@ -116,43 +118,41 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
           color: mainColor,
           child: Stack(
             children: [
-              Container(
-                child: ListView.builder(
-                    itemCount: categories.length + 2,
-                    itemBuilder: (BuildContext context, i) {
-                      if (i == 0) {
-                        // Add an extra item to the start
-                        return ListTile(
-                          title: const Text("Home",
+              ListView.builder(
+                  itemCount: categories.length + 2,
+                  itemBuilder: (BuildContext context, i) {
+                    if (i == 0) {
+                      // Add an extra item to the start
+                      return ListTile(
+                        title: const Text("Home",
+                            style: TextStyle(
+                                color: Color.fromARGB(255, 255, 255, 255))),
+                        onTap: () {
+                          Navigator.pop(context);
+                        },
+                      );
+                    }
+                    if (i == categories.length + 1) {
+                      return ListTile(
+                          title: const Text("About us",
                               style: TextStyle(
                                   color: Color.fromARGB(255, 255, 255, 255))),
                           onTap: () {
-                            Navigator.pop(context);
-                          },
-                        );
-                      }
-                      if (i == categories.length + 1) {
-                        return ListTile(
-                            title: const Text("About us",
-                                style: TextStyle(
-                                    color: Color.fromARGB(255, 255, 255, 255))),
-                            onTap: () {
-                              Navigator.of(context).push((MaterialPageRoute(
-                                  builder: (_) => const AboutUs())));
-                            });
-                      }
+                            Navigator.of(context).push((MaterialPageRoute(
+                                builder: (_) => const AboutUs())));
+                          });
+                    }
 
-                      i -= 1;
-                      return ListTile(
-                        title: Text(categories[i].category,
-                            style: const TextStyle(
-                                color: Color.fromARGB(255, 255, 255, 255))),
-                        onTap: () {
-                          Navigator.of(context).push((myRoute[i]));
-                        },
-                      );
-                    }),
-              ),
+                    i -= 1;
+                    return ListTile(
+                      title: Text(categories[i].category,
+                          style: const TextStyle(
+                              color: Color.fromARGB(255, 255, 255, 255))),
+                      onTap: () {
+                        Navigator.of(context).push((myRoute[i]));
+                      },
+                    );
+                  }),
               const OverflowBox(
                 alignment: Alignment.bottomLeft,
                 child: Icon(
