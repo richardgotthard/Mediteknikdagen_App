@@ -111,7 +111,7 @@ class _GridViewerState extends State<GridViewer> {
       SingleChildScrollView(
           //height: 480,
           child: SizedBox(
-              height: 500,
+              height: 450,
               child: StreamBuilder<List<Company>>(
                   // initialData: readCompany(),
                   stream: readCompany(),
