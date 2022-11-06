@@ -111,7 +111,7 @@ class _GridViewerState extends State<GridViewer> {
       SingleChildScrollView(
           //height: 480,
           child: SizedBox(
-              height: 540,
+              height: 500,
               child: StreamBuilder<List<Company>>(
                   // initialData: readCompany(),
                   stream: readCompany(),
@@ -171,7 +171,7 @@ class _GridViewerState extends State<GridViewer> {
                               if (currentComp.image == "") {
                                 return Container(
                                     alignment: Alignment.center,
-                                    color: Colors.grey.withOpacity(0.2),
+                                    //  color: Colors.grey.withOpacity(0.2),
                                     child: Text(currentComp.name,
                                         style: const TextStyle(fontSize: 12)));
                               } else {

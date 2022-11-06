@@ -46,8 +46,8 @@ Widget buildNotification(Notification notification) => Container(
       child: Text(notification.title),
     );
 
-class AppMountListView2 extends StatelessWidget {
-  const AppMountListView2({Key? key}) : super(key: key);
+class AppMountListView extends StatelessWidget {
+  const AppMountListView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

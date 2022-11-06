@@ -152,7 +152,7 @@ class _EventState extends State<Event> {
         style: TextStyle(color: Colors.black, fontSize: 50),
       ),
       SizedBox(
-          height: 600,
+          height: 500,
           child: StreamBuilder<List<Events_preMTD>>(
               stream: readEvents_MTD(setEvent),
               builder: (context, snapshot) {
@@ -163,14 +163,14 @@ class _EventState extends State<Event> {
                   final eventsData = snapshot.data!;
 
                   return ListView.builder(
-                    //physics: const NeverScrollableScrollPhysics(),
+                    physics: const NeverScrollableScrollPhysics(),
                     itemCount: snapshot.data!.length,
                     itemBuilder: (context, index) {
                       final currentEvent = eventsData[index];
                       return Container(
                           padding: const EdgeInsets.all(5),
                           margin: const EdgeInsets.only(
-                              top: 8, left: 50, right: 50, bottom: 8),
+                              top: 4, left: 50, right: 50, bottom: 4),
                           decoration: BoxDecoration(
                             border: Border.all(color: mainColor, width: 1),
                             borderRadius: BorderRadius.circular(10),

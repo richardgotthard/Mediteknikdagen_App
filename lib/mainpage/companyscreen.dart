@@ -86,9 +86,8 @@ class CompanyScreen extends StatelessWidget {
           borderRadius: BorderRadius.circular(10),
           color: Colors.grey.withOpacity(0.1),
         ),
-        height: 600,
         alignment: Alignment.topCenter,
-        padding: const EdgeInsets.all(10.0),
+        //padding: const EdgeInsets.all(10.0),
         margin: const EdgeInsets.all(20),
         child: Column(
           children: [
@@ -172,18 +171,27 @@ class CompanyScreen extends StatelessWidget {
                 ],
               ),
             ),
-            Container(
-              margin: const EdgeInsets.all(20.0),
-              child: AspectRatio(
-                aspectRatio: 1.5,
-                child: SizedBox(
-                  width: double.infinity,
-                  child: Image(
-                    image: NetworkImage(image),
+            LayoutBuilder(builder: (context, constraints) {
+              if (image == "") {
+                return Container(
+                    alignment: Alignment.center,
+                    //  color: Colors.grey.withOpacity(0.2),
+                    child: Text(name, style: const TextStyle(fontSize: 12)));
+              } else {
+                return Container(
+                  margin: const EdgeInsets.all(20.0),
+                  child: AspectRatio(
+                    aspectRatio: 2,
+                    child: SizedBox(
+                      width: double.infinity,
+                      child: Image(
+                        image: NetworkImage(image),
+                      ),
+                    ),
                   ),
-                ),
-              ),
-            ),
+                );
+              }
+            })
           ],
         ),
       ),
