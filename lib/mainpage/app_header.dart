@@ -1,7 +1,4 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
-import 'package:mtd_app/mainpage/settings.dart';
 
 import '../style/colors.dart';
 
@@ -15,14 +12,6 @@ class AppHeader extends StatelessWidget {
       child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
         Row(
           children: [
-            ClipOval(
-              child: Image.file(
-                File('/Users/richard/GitHub/mtd_app/assets/icon/appstore.png'),
-                width: 50,
-                height: 50,
-                fit: BoxFit.cover,
-              ),
-            ),
             const SizedBox(width: 16),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -44,14 +33,14 @@ class AppHeader extends StatelessWidget {
         Padding(
             padding: const EdgeInsets.only(right: 20.0),
             child: GestureDetector(
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const Settings(),
-                  ),
-                );
-              },
+              // onTap: () {
+              //   Navigator.push(
+              //     context,
+              //     MaterialPageRoute(
+              //       builder: (context) => const Settings(),
+              //     ),
+              //   );
+              // },
               child: const Icon(
                 Icons.settings,
                 color: mainColor,

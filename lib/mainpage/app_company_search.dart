@@ -1,16 +1,9 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 import '../style/colors.dart';
 
-import '../models/companies.dart';
-
-//final key = GlobalKey<ScaffoldState>();
-//final TextEditingController _searchQuery = TextEditingController();
-//List<CompanyModel> _list;
-//List<CompanyModel> _searchList = List();
-
-//bool _IsSearching;
-//String _searchText = "";
+String searchText = '';
 
 class Search extends StatefulWidget {
   const Search({Key? key}) : super(key: key);
@@ -19,45 +12,21 @@ class Search extends StatefulWidget {
   State<Search> createState() => _SearchState();
 }
 
-final TextEditingController _searchQuery = TextEditingController();
-
 class _SearchState extends State<Search> {
-  List<CompanyModel> found_companies = [];
-  @override
-  initState() {
-    // at the beginning, all users are shown
-    found_companies = companyItems;
-    super.initState();
-  }
+  String searchController = "";
+  // ignore: prefer_final_fields
+  TextEditingController _searchController = TextEditingController();
 
-  // This function is called whenever the text field changes
-  void _runFilter(String enteredKeyword) {
-    List<CompanyModel> results = [];
-    if (enteredKeyword.isEmpty) {
-      // if the search field is empty or only contains white-space, we'll display all users
-      results = companyItems;
-    } else {
-      // results = companyItems
-      //     .where((user) =>
-      //         user["name"].toLowerCase().contains(enteredKeyword.toLowerCase()))
-      //     .toList();
-
-      //FIX THIS!!!!! https://stackoverflow.com/questions/60245865/the-operator-isnt-defined-for-the-class-object-dart
-      // we use the toLowerCase() method to make it case-insensitive
-    }
-
-    // Refresh the UI
-    setState(() {
-      found_companies = results;
-    });
-  }
+  CollectionReference allNoteCollection =
+      FirebaseFirestore.instance.collection('Companies');
+  List<DocumentSnapshot> documents = [];
 
   @override
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.all(30),
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+        //crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const Text(
             'Discover',
@@ -76,12 +45,20 @@ class _SearchState extends State<Search> {
                     color: Colors.grey[200],
                     borderRadius: BorderRadius.circular(10),
                   ),
-                  child: Column(children: const [
+                  child: Column(children: [
                     TextField(
-                      decoration: InputDecoration(
-                        border: InputBorder.none,
-                        hintText: 'Search',
-                      ),
+                      controller: _searchController,
+                      onChanged: (value) {
+                        setState(() {
+                          searchText = value;
+                        });
+                      },
+                      decoration: const InputDecoration(
+                          hintText: "Search",
+                          prefixIcon: Icon(Icons.search),
+                          border: OutlineInputBorder(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(25.0)))),
                     ),
                   ]),
                 ),

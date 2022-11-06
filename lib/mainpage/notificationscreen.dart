@@ -1,28 +1,22 @@
 import 'package:flutter/material.dart';
-import 'package:firebase_database/firebase_database.dart';
 import 'package:mtd_app/style/colors.dart';
-import 'package:like_button/like_button.dart';
-//import 'dart:async';
-
 import '../icons/custom_app_icons.dart';
-
-DatabaseReference companyref = FirebaseDatabase.instance.ref('companies');
-
-//final _savedPosts
 
 class NotificationScreen extends StatelessWidget {
   final String image;
-  final String name;
+  final String title;
   final String description;
-  final String location;
+  final String link;
+  final String linktitle;
 
-  const NotificationScreen({
-    Key? key,
-    required this.image,
-    required this.name,
-    required this.description,
-    required this.location,
-  }) : super(key: key);
+  const NotificationScreen(
+      {Key? key,
+      this.image = "",
+      required this.title,
+      required this.description,
+      this.link = "",
+      this.linktitle = ''})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -62,7 +56,7 @@ class NotificationScreen extends StatelessWidget {
             Container(
               margin: const EdgeInsets.all(20.0),
               child: AspectRatio(
-                aspectRatio: 1.5,
+                aspectRatio: 1.2,
                 child: SizedBox(
                   width: double.infinity,
                   child: Image(
@@ -71,39 +65,35 @@ class NotificationScreen extends StatelessWidget {
                 ),
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.all(10.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Row(
-                    children: const [
-                      LikeButton(),
-                    ],
-                  ),
-                ],
-              ),
-            ),
             Container(
               margin: const EdgeInsets.all(20.0),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   Text(
-                    name,
+                    title,
                     style: const TextStyle(fontSize: 40),
                   ),
                   Text(
                     description,
-                    style: const TextStyle(fontSize: 10),
+                    style: const TextStyle(fontSize: 15, fontFamily: 'Lato'),
                   ),
-                  Container(
-                    margin: const EdgeInsets.all(10.0),
-                    child: Text(
-                      location,
-                      style: const TextStyle(fontSize: 10, color: Colors.blue),
-                    ),
-                  ),
+                  // Testpurpose for linking
+
+                  // Container(
+                  //   padding: const EdgeInsets.all(10.0),
+                  //   child: InkWell(
+                  //       child: Text(
+                  //         linktitle,
+                  //         style: const TextStyle(
+                  //             fontSize: 15,
+                  //             color: Colors.blue,
+                  //             fontFamily: 'Lato'),
+                  //       ),
+                  //       onTap: () => _launchInstagram(
+                  //           "instagram://user?username=medieteknikdagen.exe",
+                  //           "https://www.instagram.com/medieteknikdagen/")),
+                  // ),
                 ],
               ),
             ),
@@ -113,3 +103,16 @@ class NotificationScreen extends StatelessWidget {
     );
   }
 }
+
+//Test for linking data
+// void _launchInstagram(String link_native, String link_web) async {
+//   // var nativeUrl = "instagram://user?username=medieteknikdagen.exe";
+// //var webUrl = "https://www.instagram.com/medieteknikdagen/?hl=sv";
+
+//   try {
+//     await launchUrlString(link_native, mode: LaunchMode.externalApplication);
+//   } catch (e) {
+//     print(e);
+//     await launchUrlString(link_web, mode: LaunchMode.platformDefault);
+//   }
+// }

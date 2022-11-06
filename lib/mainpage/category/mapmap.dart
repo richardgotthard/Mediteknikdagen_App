@@ -1,11 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:firebase_database/firebase_database.dart';
-import 'package:mtd_app/mainpage/companyscreen.dart';
 import 'package:mtd_app/style/colors.dart';
-//import 'dart:async';
-
 import '../../icons/custom_app_icons.dart';
-import '../../models/companies.dart';
 
 class MapMap extends StatelessWidget {
   const MapMap({Key? key}) : super(key: key);

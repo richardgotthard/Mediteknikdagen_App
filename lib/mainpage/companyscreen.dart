@@ -1,34 +1,61 @@
 import 'package:flutter/material.dart';
-import 'package:firebase_database/firebase_database.dart';
 import 'package:mtd_app/style/colors.dart';
-import 'package:like_button/like_button.dart';
-//import 'dart:async';
-
 import '../icons/custom_app_icons.dart';
 
-DatabaseReference companyref = FirebaseDatabase.instance.ref('companies');
-
-//final _savedPosts
-
+// ignore: must_be_immutable
 class CompanyScreen extends StatelessWidget {
   final String image;
+  final String id;
   final String name;
   final String description;
-  final String location;
+  // final String location;
   final bool hasExjobb;
   final bool hasSommarjobb;
   final bool hasJobb;
+  final bool hasPraktik;
+  final bool hasTrainee;
+  bool isSaved;
 
-  const CompanyScreen(
-      {Key? key,
-      required this.image,
-      required this.name,
-      required this.description,
-      required this.location,
-      required this.hasExjobb,
-      required this.hasSommarjobb,
-      required this.hasJobb})
-      : super(key: key);
+  CompanyScreen({
+    Key? key,
+    required this.id,
+    required this.name,
+    required this.description,
+    //  required this.location,
+    required this.hasExjobb,
+    required this.hasSommarjobb,
+    required this.hasJobb,
+    required this.hasPraktik,
+    required this.hasTrainee,
+    this.isSaved = false,
+    required this.image,
+  }) : super(key: key);
+
+  Future<bool> onLikeButtonTapped(bool isLiked) async {
+    /// send your request here
+    //final bool success = sendRequest() as bool;
+
+    isSaved = isLiked;
+
+    /// if failed, you can do nothing
+    // return success? !isLiked:isLiked;
+    return !isLiked;
+  }
+
+  // Future addToFavorites() async {
+  //   CollectionReference _collectionRef =
+  //       FirebaseFirestore.instance.collection("Favorites");
+
+  //   return _collectionRef.doc().collection("Companies").doc().set({
+  //     "name": name,
+  //     "description": description,
+  //     "hasExjobb": hasExjobb,
+  //     "hasSommarjobb": hasSommarjobb,
+  //     "hasJobb": hasJobb,
+  //     "image": image,
+  //     "isSaved": isSaved,
+  //   });
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -66,15 +93,15 @@ class CompanyScreen extends StatelessWidget {
         child: Column(
           children: [
             Container(
-              margin: const EdgeInsets.all(20.0),
-              child: AspectRatio(
-                aspectRatio: 1.5,
-                child: SizedBox(
-                  width: double.infinity,
-                  child: Image(
-                    image: NetworkImage(image),
+              alignment: Alignment.topLeft,
+              margin: const EdgeInsets.only(left: 20.0, right: 20.0),
+              child: Column(
+                children: [
+                  Text(
+                    name,
+                    style: const TextStyle(fontSize: 40),
                   ),
-                ),
+                ],
               ),
             ),
             Padding(
@@ -83,8 +110,6 @@ class CompanyScreen extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Row(
-                    //mainAxisAlignment: MainAxisAlignment.start,
-                    //crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
                       if (hasExjobb == true) ...[
                         Container(
@@ -113,29 +138,50 @@ class CompanyScreen extends StatelessWidget {
                               style: TextStyle(color: Colors.white)),
                         ),
                       ],
-                    ],
-                  ),
-                  Row(
-                    children: const [
-                      LikeButton(),
+                      if (hasPraktik == true) ...[
+                        Container(
+                          margin: const EdgeInsets.all(5.0),
+                          padding: const EdgeInsets.all(3.0),
+                          decoration: const BoxDecoration(color: mainColor),
+                          child: const Text('Praktik',
+                              style: TextStyle(color: Colors.white)),
+                        ),
+                      ],
+                      if (hasTrainee == true) ...[
+                        Container(
+                          margin: const EdgeInsets.all(5.0),
+                          padding: const EdgeInsets.all(3.0),
+                          decoration: const BoxDecoration(color: mainColor),
+                          child: const Text('Trainee',
+                              style: TextStyle(color: Colors.white)),
+                        ),
+                      ],
                     ],
                   ),
                 ],
               ),
             ),
             Container(
-              margin: const EdgeInsets.all(20.0),
+              margin: const EdgeInsets.only(left: 20.0, right: 20.0),
               child: Column(
                 children: [
-                  Text(
-                    name,
-                    style: const TextStyle(fontSize: 40),
-                  ),
                   Text(
                     description,
                     style: const TextStyle(fontSize: 15),
                   ),
                 ],
+              ),
+            ),
+            Container(
+              margin: const EdgeInsets.all(20.0),
+              child: AspectRatio(
+                aspectRatio: 1.5,
+                child: SizedBox(
+                  width: double.infinity,
+                  child: Image(
+                    image: NetworkImage(image),
+                  ),
+                ),
               ),
             ),
           ],

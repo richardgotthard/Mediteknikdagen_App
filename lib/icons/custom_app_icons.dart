@@ -21,10 +21,7 @@ class MyFlutterApp {
   static const _kFontFam = 'MyFlutterApp';
   static const String? _kFontPkg = null;
 
-  static const IconData mtd2022 =
-      IconData(0xe800, fontFamily: _kFontFam, fontPackage: _kFontPkg);
-  static const IconData mtd_vit_1 =
-      IconData(0xe803, fontFamily: _kFontFam, fontPackage: _kFontPkg);
+  // ignore: constant_identifier_names
   static const IconData mtd_svart =
       IconData(0xe804, fontFamily: _kFontFam, fontPackage: _kFontPkg);
 }

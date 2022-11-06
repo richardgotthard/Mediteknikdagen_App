@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:mtd_app/icons/custom_app_icons.dart';
-
 import '../models/category_model.dart';
 import '../models/companies.dart';
 import '../style/colors.dart';
-import 'companyscreen.dart';
+import '../trash/companyscreen_test.dart';
 
 class SeemoreList extends StatelessWidget {
   const SeemoreList({Key? key}) : super(key: key);
@@ -57,7 +56,7 @@ class SeemoreList extends StatelessWidget {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => CompanyScreen(
+                          builder: (context) => CompanyScreenTest(
                               image: companyItems[index].path,
                               name: companyItems[index].name,
                               description: companyItems[index].description,

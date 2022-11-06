@@ -1,25 +1,7 @@
 import 'package:flutter/material.dart';
-
-import 'package:mtd_app/models/category_model.dart';
+import 'package:mtd_app/models/mtdgruppen.dart';
 import 'package:mtd_app/style/colors.dart';
-//import 'dart:async';
-
 import '../../icons/custom_app_icons.dart';
-
-List<String> myMTD = [
-  "Projektledare",
-  "Projektassistent",
-  "Koordinator",
-  "Föreläsningsansvarig",
-  "Mässansvarig",
-  "Bankettansvarig",
-  "Företagsansvarig",
-  "Företagsansvarig",
-  "PR-ansvarig",
-  "Tryckansvarig",
-  "Webbansvarig",
-  "Appansvarig",
-];
 
 class AboutUs extends StatelessWidget {
   const AboutUs({Key? key}) : super(key: key);
@@ -61,19 +43,51 @@ class AboutUs extends StatelessWidget {
               Expanded(
                   child: ListView.builder(
                       shrinkWrap: true,
-                      itemCount: myMTD.length,
+                      itemCount: mtdgruppen_list.length,
                       itemBuilder: (BuildContext context, i) {
-                        final currentMTD = myMTD[i];
+                        final currentMTD = mtdgruppen_list[i];
                         return Container(
+                            padding: const EdgeInsets.all(10),
+                            margin: const EdgeInsets.only(
+                                top: 2, left: 10, right: 10, bottom: 2),
                             decoration: BoxDecoration(
-                              border: Border.all(color: Colors.black, width: 2),
-                              // color: Colors.grey.withOpacity(0.1),
+                              border: Border.all(color: mainColor, width: 1),
+                              borderRadius: BorderRadius.circular(10),
                             ),
-                            child: ListTile(
-                              title: Text(
-                                currentMTD,
-                              ),
-                            ));
+                            child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text(
+                                    currentMTD.role,
+                                  ),
+                                  Container(
+                                    width: 200,
+                                    margin: const EdgeInsets.only(
+                                      left: 20,
+                                    ),
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          currentMTD.name,
+                                          style: const TextStyle(
+                                            color: Colors.black,
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                        ),
+                                        Text(
+                                          currentMTD.contac_mail,
+                                          style: const TextStyle(
+                                            fontSize: 10,
+                                            color: Colors.black,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ]));
                       })),
             ],
           ),

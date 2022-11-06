@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:firebase_database/firebase_database.dart';
 import 'package:mtd_app/mainpage/companyscreen.dart';
+import 'package:mtd_app/models/companies_firebase.dart';
 import 'package:mtd_app/style/colors.dart';
-//import 'dart:async';
-
 import '../../icons/custom_app_icons.dart';
 import '../../models/companies.dart';
 
@@ -33,38 +31,55 @@ class Companies extends StatelessWidget {
           ],
           iconTheme: const IconThemeData(color: Colors.white),
         ),
-        body: ListView.builder(
-            padding: const EdgeInsets.all(20.0),
-            itemCount: companyItems.length,
-            itemBuilder: (BuildContext ctx, index) {
-              final currentComp = companyItems[index];
-              return GestureDetector(
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => CompanyScreen(
-                            image: companyItems[index].path,
-                            name: companyItems[index].name,
-                            description: companyItems[index].description,
-                            location: companyItems[index].location,
-                            hasExjobb: companyItems[index].hasExjobb,
-                            hasSommarjobb: companyItems[index].hasSommarjobb,
-                            hasJobb: companyItems[index].hasJobb),
-                      ),
-                    );
-                  },
-                  child: Container(
-                    padding: const EdgeInsets.all(30.0),
-                    margin: const EdgeInsets.all(10),
-                    decoration: BoxDecoration(
-                      border: Border.all(color: mainColor, width: 2),
-                      borderRadius: BorderRadius.circular(10),
-                      color: Colors.grey.withOpacity(0.1),
-                    ),
-                    alignment: Alignment.center,
-                    child: Text(currentComp.name),
-                  ));
+        body: StreamBuilder<List<Company>>(
+            // initialData: readCompany(),
+            stream: readCompany(),
+            builder: (context, snapshot) {
+              if (snapshot.hasError) {
+                return const Text(
+                    'Something went wrong!  '); //${snapshot.error}
+              } else if (snapshot.hasData) {
+                var companyss = snapshot.data!;
+
+                return ListView.builder(
+                    padding: const EdgeInsets.all(20.0),
+                    itemCount: snapshot.data!.length,
+                    itemBuilder: (BuildContext ctx, index) {
+                      final currentComp = companyss[index];
+                      return GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => CompanyScreen(
+                                  image: currentComp.image,
+                                  name: currentComp.name,
+                                  description: currentComp.description,
+                                  hasExjobb: currentComp.hasExjobb,
+                                  hasSommarjobb: currentComp.hasSommarjobb,
+                                  hasJobb: currentComp.hasJobb,
+                                  hasTrainee: currentComp.hasTrainee,
+                                  hasPraktik: currentComp.hasPraktik,
+                                  id: '',
+                                ),
+                              ),
+                            );
+                          },
+                          child: Container(
+                            padding: const EdgeInsets.all(30.0),
+                            margin: const EdgeInsets.all(10),
+                            decoration: BoxDecoration(
+                              border: Border.all(color: mainColor, width: 2),
+                              borderRadius: BorderRadius.circular(10),
+                              color: Colors.grey.withOpacity(0.1),
+                            ),
+                            alignment: Alignment.center,
+                            child: Text(currentComp.name),
+                          ));
+                    });
+              } else {
+                return const Text('Loading...');
+              }
             }));
   }
 }
