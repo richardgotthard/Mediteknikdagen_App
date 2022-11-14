@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:mtd_app/style/colors.dart';
 import '../icons/custom_app_icons.dart';
@@ -5,7 +6,7 @@ import '../icons/custom_app_icons.dart';
 // ignore: must_be_immutable
 class CompanyScreen extends StatelessWidget {
   final String image;
-  final String id;
+
   final String name;
   final String description;
   // final String location;
@@ -18,7 +19,6 @@ class CompanyScreen extends StatelessWidget {
 
   CompanyScreen({
     Key? key,
-    required this.id,
     required this.name,
     required this.description,
     //  required this.location,
@@ -30,17 +30,6 @@ class CompanyScreen extends StatelessWidget {
     this.isSaved = false,
     required this.image,
   }) : super(key: key);
-
-  Future<bool> onLikeButtonTapped(bool isLiked) async {
-    /// send your request here
-    //final bool success = sendRequest() as bool;
-
-    isSaved = isLiked;
-
-    /// if failed, you can do nothing
-    // return success? !isLiked:isLiked;
-    return !isLiked;
-  }
 
   // Future addToFavorites() async {
   //   CollectionReference _collectionRef =
@@ -61,6 +50,7 @@ class CompanyScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        centerTitle: true,
         elevation: 0,
         backgroundColor: mainColor,
         title: Center(
@@ -81,29 +71,26 @@ class CompanyScreen extends StatelessWidget {
         iconTheme: const IconThemeData(color: Colors.white),
       ),
       body: Container(
+        constraints: const BoxConstraints(minHeight: 400, maxHeight: 600),
         decoration: BoxDecoration(
           border: Border.all(color: mainColor, width: 2),
           borderRadius: BorderRadius.circular(10),
-          color: Colors.grey.withOpacity(0.1),
+         // color: Colors.grey.withOpacity(0.1),
         ),
         alignment: Alignment.topCenter,
-        //padding: const EdgeInsets.all(10.0),
+        padding: const EdgeInsets.all(10.0),
         margin: const EdgeInsets.all(20),
         child: Column(
           children: [
             Container(
               alignment: Alignment.topLeft,
               margin: const EdgeInsets.only(left: 20.0, right: 20.0),
-              child: Column(
-                children: [
-                  Text(
-                    name,
-                    style: const TextStyle(fontSize: 40),
-                  ),
-                ],
+              child: Text(
+                name,
+                style: const TextStyle(fontSize: 40),
               ),
             ),
-            Padding(
+            Container(
               padding: const EdgeInsets.all(10.0),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -112,7 +99,7 @@ class CompanyScreen extends StatelessWidget {
                     children: [
                       if (hasExjobb == true) ...[
                         Container(
-                          margin: const EdgeInsets.all(5.0),
+                          margin: const EdgeInsets.all(3.0),
                           padding: const EdgeInsets.all(3.0),
                           decoration: const BoxDecoration(color: mainColor),
                           child: const Text('Exjobb',
@@ -121,7 +108,7 @@ class CompanyScreen extends StatelessWidget {
                       ],
                       if (hasSommarjobb == true) ...[
                         Container(
-                          margin: const EdgeInsets.all(5.0),
+                          margin: const EdgeInsets.all(3.0),
                           padding: const EdgeInsets.all(3.0),
                           decoration: const BoxDecoration(color: mainColor),
                           child: const Text('Sommarjobb',
@@ -130,7 +117,7 @@ class CompanyScreen extends StatelessWidget {
                       ],
                       if (hasJobb == true) ...[
                         Container(
-                          margin: const EdgeInsets.all(5.0),
+                          margin: const EdgeInsets.all(3.0),
                           padding: const EdgeInsets.all(3.0),
                           decoration: const BoxDecoration(color: mainColor),
                           child: const Text('Jobb',
@@ -139,7 +126,7 @@ class CompanyScreen extends StatelessWidget {
                       ],
                       if (hasPraktik == true) ...[
                         Container(
-                          margin: const EdgeInsets.all(5.0),
+                          margin: const EdgeInsets.all(3.0),
                           padding: const EdgeInsets.all(3.0),
                           decoration: const BoxDecoration(color: mainColor),
                           child: const Text('Praktik',
@@ -148,7 +135,7 @@ class CompanyScreen extends StatelessWidget {
                       ],
                       if (hasTrainee == true) ...[
                         Container(
-                          margin: const EdgeInsets.all(5.0),
+                          margin: const EdgeInsets.all(3.0),
                           padding: const EdgeInsets.all(3.0),
                           decoration: const BoxDecoration(color: mainColor),
                           child: const Text('Trainee',
@@ -160,33 +147,34 @@ class CompanyScreen extends StatelessWidget {
                 ],
               ),
             ),
-            Container(
-              margin: const EdgeInsets.only(left: 20.0, right: 20.0),
-              child: Column(
-                children: [
-                  Text(
-                    description,
-                    style: const TextStyle(fontSize: 15),
-                  ),
-                ],
-              ),
+            Flexible(
+              child: LayoutBuilder(builder: (context, constraints) {
+                if (description == "") {
+                  return const SizedBox.shrink();
+                } else {
+                  return SingleChildScrollView(
+                    child: Container(
+                      margin: const EdgeInsets.only(left: 20.0, right: 20.0),
+                      child: Text(
+                        description,
+                        style: const TextStyle(fontSize: 20,  fontFamily: 'Lato'),
+                      ),
+                    ),
+                  );
+                }
+              }),
             ),
             LayoutBuilder(builder: (context, constraints) {
               if (image == "") {
-                return Container(
-                    alignment: Alignment.center,
-                    //  color: Colors.grey.withOpacity(0.2),
-                    child: Text(name, style: const TextStyle(fontSize: 12)));
+                return const SizedBox.shrink();
               } else {
                 return Container(
                   margin: const EdgeInsets.all(20.0),
+                  alignment: Alignment.topCenter,
                   child: AspectRatio(
-                    aspectRatio: 2,
-                    child: SizedBox(
-                      width: double.infinity,
-                      child: Image(
-                        image: NetworkImage(image),
-                      ),
+                    aspectRatio: 1.5,
+                    child: Image(
+                      image: CachedNetworkImageProvider(image),
                     ),
                   ),
                 );

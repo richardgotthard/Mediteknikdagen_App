@@ -3,13 +3,11 @@ import 'package:mtd_app/mainpage/companyscreen.dart';
 import 'package:mtd_app/models/companies_firebase.dart';
 import 'package:mtd_app/style/colors.dart';
 import '../../icons/custom_app_icons.dart';
-import '../../models/companies.dart';
 
 class Companies extends StatelessWidget {
   const Companies({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    companyItems.sort((a, b) => a.name.compareTo(b.name));
     return Scaffold(
         appBar: AppBar(
           elevation: 0,
@@ -33,7 +31,7 @@ class Companies extends StatelessWidget {
         ),
         body: StreamBuilder<List<Company>>(
             // initialData: readCompany(),
-            stream: readCompany(),
+            stream: readCompanyABC(),
             builder: (context, snapshot) {
               if (snapshot.hasError) {
                 return const Text(
@@ -60,7 +58,6 @@ class Companies extends StatelessWidget {
                                   hasJobb: currentComp.hasJobb,
                                   hasTrainee: currentComp.hasTrainee,
                                   hasPraktik: currentComp.hasPraktik,
-                                  id: '',
                                 ),
                               ),
                             );

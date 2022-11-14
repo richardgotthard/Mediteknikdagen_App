@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:mtd_app/mainpage/app_company_welcome.dart';
 import 'package:mtd_app/mainpage/app_listview.dart';
-import 'package:mtd_app/mainpage/category/aboutus.dart';
+import 'package:mtd_app/notification.dart';
+
 import 'package:mtd_app/trash/schedule.dart';
 import 'package:mtd_app/mainpage/gridviewer.dart';
 import 'package:mtd_app/style/colors.dart';
@@ -12,7 +13,6 @@ import '../icons/custom_app_icons.dart';
 import 'mainpage/category/companies.dart';
 import 'mainpage/category/events.dart';
 import 'mainpage/category/mapmap.dart';
-import 'models/category_model.dart';
 
 List<Route> myRoute = [
   MaterialPageRoute(builder: (_) => const Companies()),
@@ -36,9 +36,8 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
         //AppHeader(),
         AppWelcomer(),
         AppSearch(),
-        Expanded(
-          child: AppMountListView(),
-        ),
+        AppMountListView(),
+
         //AppCategoryList(),
         //AppBottomBar(),
       ],
@@ -57,6 +56,16 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
     ]),
   ];
 
+  @override
+  void initState() {
+    final firebaseMessaging = FCM();
+
+    firebaseMessaging.setPermission();
+    firebaseMessaging.setNotifications();
+    firebaseMessaging.fcmSubscribe("123");
+    super.initState();
+  }
+
   void _onItemTapped(int index) {
     setState(() {
       _selectedIndex = index;
@@ -66,31 +75,36 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        resizeToAvoidBottomInset: false,
         //  key: _scaffoldKey,
-        appBar: AppBar(
-          centerTitle: true,
-          systemOverlayStyle: const SystemUiOverlayStyle(
-            // Status bar color
-            statusBarColor: Colors.red,
+        appBar: PreferredSize(
+          preferredSize:
+              Size.fromHeight(MediaQuery.of(context).size.height * 0.08),
+          child: AppBar(
+            centerTitle: true,
+            systemOverlayStyle: const SystemUiOverlayStyle(
+              // Status bar color
+              statusBarColor: Colors.red,
 
-            // Status bar brightness (optional)
-            statusBarIconBrightness:
-                Brightness.dark, // For Android (dark icons)
-            statusBarBrightness: Brightness.light, // For iOS (dark icons)
-          ),
-          elevation: 0,
-          backgroundColor: Colors.transparent,
-          title: const InkWell(
-            child: Icon(
-              MyFlutterApp.mtd_svart,
-              color: mainColor,
-              size: 40,
+              // Status bar brightness (optional)
+              statusBarIconBrightness:
+                  Brightness.dark, // For Android (dark icons)
+              statusBarBrightness: Brightness.light, // For iOS (dark icons)
             ),
+            elevation: 0,
+            backgroundColor: Colors.transparent,
+            title: const InkWell(
+              child: Icon(
+                MyFlutterApp.mtd_svart,
+                color: mainColor,
+                size: 40,
+              ),
+            ),
+            actions: const [
+              SizedBox(width: 40, height: 40),
+            ],
+            iconTheme: const IconThemeData(color: mainColor),
           ),
-          actions: const [
-            SizedBox(width: 40, height: 40),
-          ],
-          iconTheme: const IconThemeData(color: mainColor),
         ),
         // Drawer: in progress
         // drawer: Drawer(
@@ -156,10 +170,12 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
           child: _widgetOptions.elementAt(_selectedIndex),
         ),
         bottomNavigationBar: SizedBox(
-          // height: 70,
+          height: MediaQuery.of(context).size.height * 0.12,
           child: BottomNavigationBar(
+            showSelectedLabels: false,
+            showUnselectedLabels: false,
             type: BottomNavigationBarType.fixed,
-            //  elevation: 0,
+            elevation: 0,
             backgroundColor: mainColor,
             items: const <BottomNavigationBarItem>[
               BottomNavigationBarItem(

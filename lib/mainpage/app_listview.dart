@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:mtd_app/mainpage/notificationscreen.dart';
@@ -8,6 +9,8 @@ class Notification {
   String linktitle;
   String link;
   String image;
+  String url;
+  String urlNative;
 
   Notification({
     required this.title,
@@ -15,6 +18,8 @@ class Notification {
     this.linktitle = '',
     this.link = '',
     this.image = '',
+    this.url = '',
+    this.urlNative = '',
   });
 
   Map<String, dynamic> toJson() => {
@@ -23,6 +28,8 @@ class Notification {
         'linktitle': linktitle,
         'link': link,
         'image': image,
+        'url': url,
+        'url_native': urlNative,
       };
 
   static Notification fromJson(Map<String, dynamic> json) => Notification(
@@ -31,12 +38,14 @@ class Notification {
         linktitle: json['link_title'],
         link: json['link'],
         image: json['image'],
+        url: json['url'],
+        urlNative: json['url_native'],
       );
 }
 
 Stream<List<Notification>> readNotification() => FirebaseFirestore.instance
     .collection("Notifications")
-    .snapshots()
+    .snapshots(includeMetadataChanges: true)
     .map((snapshot) =>
         snapshot.docs.map((doc) => Notification.fromJson(doc.data())).toList());
 
@@ -51,8 +60,8 @@ class AppMountListView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-        height: 200,
+    return Expanded(
+        flex: 6,
         child: StreamBuilder<List<Notification>>(
             stream: readNotification(),
             builder: (context, snapshot) {
@@ -79,6 +88,8 @@ class AppMountListView extends StatelessWidget {
                               description: currentNotif.description,
                               link: currentNotif.link,
                               linktitle: currentNotif.linktitle,
+                              url: currentNotif.url,
+                              urlNative: currentNotif.urlNative,
                             ),
                           ),
                         );
@@ -90,8 +101,15 @@ class AppMountListView extends StatelessWidget {
                         width: 200,
                         height: 200,
                         decoration: BoxDecoration(
+                          boxShadow: const [
+                            BoxShadow(
+                                color: Colors.black12,
+                                offset: Offset(10, 10),
+                                blurRadius: 10),
+                          ],
                           image: DecorationImage(
-                            image: NetworkImage(currentNotif.image),
+                            image:
+                                CachedNetworkImageProvider(currentNotif.image),
                             fit: BoxFit.cover,
                           ),
                           borderRadius: BorderRadius.circular(16),
