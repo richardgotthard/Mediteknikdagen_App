@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Firebase.initializeApp();
+    //Firebase.initializeApp();
     return MaterialApp(
       navigatorKey: NavigationService.navigatorKey,
       theme: ThemeData(fontFamily: 'Barlow'),

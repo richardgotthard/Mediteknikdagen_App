@@ -15,9 +15,8 @@ class CompanyScreen extends StatelessWidget {
   final bool hasJobb;
   final bool hasPraktik;
   final bool hasTrainee;
-  bool isSaved;
 
-  CompanyScreen({
+  const CompanyScreen({
     Key? key,
     required this.name,
     required this.description,
@@ -27,7 +26,6 @@ class CompanyScreen extends StatelessWidget {
     required this.hasJobb,
     required this.hasPraktik,
     required this.hasTrainee,
-    this.isSaved = false,
     required this.image,
   }) : super(key: key);
 
@@ -75,7 +73,7 @@ class CompanyScreen extends StatelessWidget {
         decoration: BoxDecoration(
           border: Border.all(color: mainColor, width: 2),
           borderRadius: BorderRadius.circular(10),
-         // color: Colors.grey.withOpacity(0.1),
+          // color: Colors.grey.withOpacity(0.1),
         ),
         alignment: Alignment.topCenter,
         padding: const EdgeInsets.all(10.0),
@@ -157,7 +155,8 @@ class CompanyScreen extends StatelessWidget {
                       margin: const EdgeInsets.only(left: 20.0, right: 20.0),
                       child: Text(
                         description,
-                        style: const TextStyle(fontSize: 20,  fontFamily: 'Lato'),
+                        style:
+                            const TextStyle(fontSize: 20, fontFamily: 'Lato'),
                       ),
                     ),
                   );

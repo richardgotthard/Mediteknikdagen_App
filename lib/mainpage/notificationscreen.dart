@@ -1,7 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:mtd_app/style/colors.dart';
-import 'package:url_launcher/url_launcher.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 import '../icons/custom_app_icons.dart';
 
@@ -14,16 +13,16 @@ class NotificationScreen extends StatelessWidget {
   final String url;
   final String urlNative;
 
-  const NotificationScreen(
-      {Key? key,
-      this.image = "",
-      required this.title,
-      required this.description,
-      this.link = "",
-      this.linktitle = '',
-      this.url = '',
-      this.urlNative = ''})
-      : super(key: key);
+  const NotificationScreen({
+    Key? key,
+    this.image = "",
+    required this.title,
+    required this.description,
+    this.link = "",
+    this.linktitle = '',
+    this.url = '',
+    this.urlNative = '',
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -72,20 +71,28 @@ class NotificationScreen extends StatelessWidget {
                 ),
               ),
             ),
-            Container(
-              margin: const EdgeInsets.all(20.0),
-              child: Text(
-                title,
-                style: const TextStyle(fontSize: 40),
-              ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Center(
+                  child: Container(
+                    margin: const EdgeInsets.all(20.0),
+                    child: Text(
+                      title,
+                      style: const TextStyle(fontSize: 40),
+                    ),
+                  ),
+                ),
+              ],
             ),
+
             Expanded(
               child: SingleChildScrollView(
                 child: Container(
                   margin: const EdgeInsets.only(left: 20.0, right: 20.0),
                   child: Text(
                     description,
-                    style: const TextStyle(fontSize: 15, fontFamily: 'Lato'),
+                    style: const TextStyle(fontSize: 18, fontFamily: 'Lato'),
                   ),
                 ),
               ),
@@ -102,14 +109,15 @@ class NotificationScreen extends StatelessWidget {
                       child: Text(
                         linktitle,
                         style: const TextStyle(
-                            fontSize: 15,
+                            fontSize: 20,
                             color: Colors.blue,
                             fontFamily: 'Lato'),
                       ),
                       onTap: () => _launchUrl(url, urlNative)),
                 );
               }
-            })
+            }
+            )
           ],
         ),
       ),
@@ -143,3 +151,6 @@ void _launchUrl(String webUrl, String nativeUrl) async {
   //   await launchUrlString(linkWeb, mode: LaunchMode.platformDefault);
   // }
 }
+// DateTime date =
+     //   DateTime.fromMicrosecondsSinceEpoch(sorttime.microsecondsSinceEpoch);
+    //final birthday = DateTime(date.year, date.month, date.day);

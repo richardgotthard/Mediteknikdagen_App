@@ -66,6 +66,9 @@
 	<key>NSBonjourServices</key>
 	<array>
     <string>_dartobservatory._tcp</string>
+	<array>
+    <string>UIInterfaceOrientationPortrait</string>
+	</array>
 </array>
 </dict>
 </plist>

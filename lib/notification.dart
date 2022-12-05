@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
+
 // import 'package:flutter/material.dart';
 // import 'package:mtd_app/navigation_not.dart';
 
@@ -26,7 +27,7 @@ Future<void> onBackgroundMessage(RemoteMessage message) async {
 }
 
 class FCM {
-  final FirebaseMessaging _firebaseMessaging = FirebaseMessaging.instance;
+  final _firebaseMessaging = FirebaseMessaging.instance;
 
   final streamCtlr = StreamController<String>.broadcast();
   final titleCtlr = StreamController<String>.broadcast();
@@ -45,14 +46,23 @@ class FCM {
     );
   }
 
-  Future addToNotification(String title, String description, String linktitle,
-      String link, String image) async {
+  Future addToNotification(
+    String title,
+    String description,
+    String linktitle,
+    String link,
+    String image,
+    String url,
+    String urlNative,
+  ) async {
     return FirebaseFirestore.instance.collection("Notifications").doc().set({
       'title': title,
       'description': description,
-      'linktitle': linktitle,
+      'link_title': linktitle,
       'link': link,
       'image': image,
+      'url': url,
+      'urlNative': urlNative,
     });
   }
 
@@ -66,8 +76,8 @@ class FCM {
         //print("message recieved 123");
         if (message.data.containsKey('goTo')) {
           // Handle data message
-          // final data = message.data['goTo'];
-          //print(data);
+          //final data = message.data['goTo'];
+          // print(data);
         }
         if (message.data.containsKey('notification')) {
           // Handle notification message
@@ -79,13 +89,14 @@ class FCM {
         bodyCtlr.sink.add(message.notification!.body!);
       },
     );
+    //TODdo : Fix notificationpushing
     FirebaseMessaging.onMessageOpenedApp.listen((message) {
-     // RemoteNotification? notification = message.notification;
-     // AndroidNotification? android = message.notification?.android;
-      //print('Message clicked! 123');
-      //print(message.data);
+      // RemoteNotification? notification = message.notification;
+      // AndroidNotification? android = message.notification?.android;
+      // print('Message clicked! 123');
+      // print(message.data);
       // if (message.data.containsKey('goTo')) {
-      //   // Handle data message
+      //   // addToNotification(message.notification.)
       //   final data = message.data['goTo'];
       //   if (data == "order") {
       //     Map<String, dynamic> currentNotif = message.data;
@@ -105,8 +116,9 @@ class FCM {
       // }
     });
     // With this token you can test it easily on your phone
-    //final token =
-    //  _firebaseMessaging.getToken().then((value) => print('Token: $value'));
+    // final token =
+    //     _firebaseMessaging.getToken().then((value) => print('Token: $value'));
+    // print(token);
   }
 
   void fcmSubscribe(String topic) {

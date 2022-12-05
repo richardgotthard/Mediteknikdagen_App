@@ -72,7 +72,6 @@ class AppWelcomer extends StatelessWidget {
                                         hasPraktik: currentComp.hasPraktik,
                                         hasTrainee: currentComp.hasTrainee,
                                         hasJobb: currentComp.hasJobb,
-                                        isSaved: currentComp.isSaved,
                                       ),
                                     ),
                                   );

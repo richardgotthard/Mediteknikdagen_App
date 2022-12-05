@@ -10,7 +10,7 @@ class Company {
   final bool hasSommarjobb;
   final bool hasPraktik;
   final bool hasTrainee;
-  bool isSaved;
+
   String image;
 
   Company({
@@ -22,7 +22,6 @@ class Company {
     required this.hasSommarjobb,
     this.hasPraktik = false,
     this.hasTrainee = false,
-    this.isSaved = false,
     this.image = "",
   });
 
@@ -36,7 +35,7 @@ class Company {
         'hasSommarjobb': hasSommarjobb,
         'hasPraktik': hasPraktik,
         'hasTrainee': hasTrainee,
-        'isSaved': isSaved,
+
         'image': image,
       };
 
@@ -50,7 +49,7 @@ class Company {
         hasSommarjobb: json['hasSommarjobb'],
         hasPraktik: json['hasPraktik'],
         hasTrainee: json['hasTrainee'],
-        isSaved: json['saved'],
+
         image: json['image'],
       );
 }
