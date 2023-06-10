@@ -3,6 +3,7 @@ import 'package:mtd_app/models/mtdgruppen.dart';
 import 'package:mtd_app/style/colors.dart';
 import '../../icons/custom_app_icons.dart';
 
+//didnt get included in final version
 class MapMassan extends StatelessWidget {
   const MapMassan({Key? key}) : super(key: key);
   @override

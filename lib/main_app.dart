@@ -9,7 +9,7 @@ import 'package:mtd_app/notification.dart';
 import 'package:mtd_app/mainpage/gridviewer.dart';
 import 'package:mtd_app/style/colors.dart';
 
-import 'mainpage/app_search.dart';
+import 'mainpage/app_text.dart';
 import '../icons/custom_app_icons.dart';
 
 import 'mainpage/category/events.dart';
@@ -49,7 +49,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
       // Search(),
       GridViewer(),
     ]),
-    //***  SAVED COMPANIES, REQUIRES USER ***/
+    //***  SAVE COMPANIES, REQUIRES USER ***/
     // Column(children: const [
     //   SavedList(),
     // ]),

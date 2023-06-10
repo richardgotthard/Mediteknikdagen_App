@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:mtd_app/mainpage/companyscreen.dart';
 import 'package:mtd_app/models/companies_firebase.dart';
 import 'package:mtd_app/style/colors.dart';
-import '../../icons/custom_app_icons.dart';
+import '../icons/custom_app_icons.dart';
 
 class Companies extends StatelessWidget {
   const Companies({Key? key}) : super(key: key);

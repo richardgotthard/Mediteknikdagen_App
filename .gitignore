@@ -24,7 +24,6 @@
 **/doc/api/
 **/ios/Flutter/.last_build_id
 **/lib/trash/
-**/lib/progress/
 .dart_tool/
 .flutter-plugins
 .flutter-plugins-dependencies

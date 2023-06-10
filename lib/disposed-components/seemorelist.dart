@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:mtd_app/icons/custom_app_icons.dart';
 import '../models/category_model.dart';
-import '../models/companies.dart';
+import 'companyItems.dart';
 import '../style/colors.dart';
 import '../trash/companyscreen_test.dart';
+
 
 class SeemoreList extends StatelessWidget {
   const SeemoreList({Key? key}) : super(key: key);
