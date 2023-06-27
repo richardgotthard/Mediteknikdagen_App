@@ -1,6 +1,6 @@
 # mtd_app
 
-A new Flutter project.
+Official App of Mediteknikdagen. Includes support for Firebase and FCM (Firebase Push Notifications). 
 
 ## Getting Started
 
