@@ -1,4 +1,4 @@
-# mtd_app
+# Mediteknikdagen_App
 
 Official App of Mediteknikdagen. Includes support for Firebase and FCM (Firebase Push Notifications). 
 
